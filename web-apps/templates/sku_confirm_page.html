@@ -1,0 +1,39 @@
+{% extends "inv_base.html" %}
+{% block content %}
+<html>
+    <body>
+    {% if current_user.is_authenticated %}
+        <div class="container">
+        <div class="row" style="font-size:200%"><b>
+            Location: {{ location }}
+            </b>
+        </div>
+        <div class="row" style="font-size:400%"><b>
+            {{ sku }}
+            </b>
+        </div>
+        <div class="row" style="font-size:150%">
+            Vendor: {{ vendor }}
+        </div>
+        <div class="row" style="font-size:200%">
+            {{ description }}
+        </div>
+        <p></p>
+        <div class="row">
+            {{ message }}
+        </div>
+        <p></p>
+        <div class="row" style="font-size:200%">
+            <form action="." method="POST">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Back">
+            </form>
+            <form action="." method="POST">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Confirm">
+            </form>
+        </div>
+    {% endif %}
+    </div><!-- /.container -->
+
+    </body>
+</html>
+{% endblock %}
