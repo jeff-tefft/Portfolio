@@ -1,0 +1,52 @@
+{% extends "inv_base.html" %}
+{% block content %}
+<html>
+    <body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+
+    {% if current_user.is_authenticated %}
+        <div class="container">
+        <div class="row" style="font-size:200%"><b>
+            Location: {{ location }}
+
+            <form action="." method="POST">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Location Complete">
+            </form>
+            </b>
+        </div>
+        <div class="row" style="font-size:200%"><b>
+            Last Item Entered: {{ last_item_entered }}
+            </b>
+        </div>
+        <div class="row" style="font-size:200%"><b>
+            Current Item Index: {{ current_item_index }}
+            </b>
+        </div>
+        <div class="row" style="font-size:200%">
+            <form action="." method="POST">
+                <input name="SKU" value="" autofocus>
+                <input type="submit" name='submit_control' class="btn btn-success" value="Enter SKU">
+        </div>
+        <div class="row">
+        {% for size, checked in sizes %}
+            <input type=checkbox name=size value={{ size }} {{ 'checked' if checked else "" }}> {{ size }}<br>
+        {% endfor %}
+        </div>
+        <br>
+        <input type=checkbox name=backstock value=backstock {{ 'checked' if backstock else "" }}> Backstock<br/>
+        </form>
+    {% endif %}
+    </div><!-- /.container -->
+
+    </body>
+</html>
+{% endblock %}
