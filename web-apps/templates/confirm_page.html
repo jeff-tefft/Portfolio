@@ -1,0 +1,43 @@
+{% extends "inv_base.html" %}
+{% block content %}
+<html>
+    <body>
+    {% if current_user.is_authenticated %}
+        <div class="container">
+        <div class="row" style="font-size:200%"><b>
+            Location: {{ location }}
+            </b>
+        </div>
+        <div class="row">
+            {{ backstock }}
+        </div>
+        <div class="row" style="font-size:400%"><b>
+            {{ sku }}
+            </b>
+        </div>
+        <div class="row">
+            Vendor: {{ vendor }}
+        </div>
+        <div class="row" style="font-size:150%">
+            {{ description }}
+        </div>
+
+        <div class="row" style="font-size:300%"><b>
+            Count:
+            {{ count }}
+            </b>
+        </div>
+        <div class="row" style="font-size:200%">
+            <form action="." method="POST">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Back">
+            </form>
+            <form action="." method="POST" style="font-size:200%">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Confirm">
+            </form>
+        </div>
+    {% endif %}
+    </div><!-- /.container -->
+
+    </body>
+</html>
+{% endblock %}
