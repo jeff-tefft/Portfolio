@@ -1,0 +1,67 @@
+{% extends "inv_base.html" %}
+{% block content %}
+   <body>
+     {% if current_user.is_authenticated %}
+        <div class="container">
+
+        <div class="row">
+            <form action="." method="POST">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Clear All Data">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Clear Only Count Data">
+            </form>
+            <form action="." method="POST">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Add Users">
+            </form>
+            <form action="." method="POST">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Add Items by Location">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Upload File">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Load Sample Data">
+            </form>
+            <form action="." method="POST">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Items without Locations">
+            </form>
+            <form action="." method="POST">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Start">
+            </form>
+            <form action="." method="POST">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Download File">
+            </form>
+            <form action="." method="POST">
+                Warning: This may have unpredictable results.
+                <input type="submit" name='submit_control' class="btn btn-success" value="CurrentTest">
+            </form>
+
+        </div>
+        <div class="row" style="font-size:200%"><b>
+            Users and Assignments
+        </b>
+        </div>
+        {% for user, location, count in user_assignments %}
+            <div class="row" style="font-size:150%">
+                {{ user }} : {{ location }} : {{ count }}
+            </div>
+        {% endfor %}
+        <div class="row" style="font-size:200%">
+            Change an assignment manually
+        </div>
+        <div class="row" style="font-size:150%">
+            <form action="." method="POST">
+                Username: <input name="Username" value="">
+                 New Assignment ID: <input type="number" name="ID" value="">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Reassign">
+            </form>
+        </div>
+        <div class="row" style="font-size:200%"><p><b>
+            Open Assignments
+        </b></p></div>
+        {% for the_id, the_location in open_assignments %}
+            <div class="row" style="font-size:150%">
+                {{ the_id }} : {{ the_location }}
+            </div>
+        {% endfor %}
+        {{ message }}
+    {% endif %}
+    </div><!-- /.container -->
+
+    </body>
+{% endblock %}
