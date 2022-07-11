@@ -1,0 +1,17 @@
+{% extends "inv_base.html" %}
+{% block content %}
+<html>
+    <body>
+    {% if current_user.is_authenticated %}
+        <div class="container">
+
+        <div class="row">
+            Waiting for assignment to become available. Please take a break, and then refresh the page to try again. If there are still no assignments, check with the person running the count to see if the count is complete.
+        </div>
+
+    {% endif %}
+    </div><!-- /.container -->
+
+    </body>
+</html>
+{% endblock %}
