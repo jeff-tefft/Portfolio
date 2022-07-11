@@ -699,7 +699,7 @@ def MainWindow(outputSets, file1Sets, file2Sets, curdir, file1Resets, file2Reset
             SheetCombinerStart(outputSets, file1Sets, file2Sets, curdir)
             #add SheetCombinerStart function
         else:
-            print('Error: Button not recognized.')
+            sg.Popup('Error: Button not recognized.')
             mainWind.close()
             sys.exit()
 
@@ -738,6 +738,7 @@ def FileNameFolder(values, key, key2):
 
 
 #updates the file settings dict passed from a settings window
+    #debug - will grab Headings named after columns, not sure how
 def UpdateFileDict(values, fileSets, colHeads):
     #split filepath into foldername and filename
     FileNameFolder(values, 'File Name', 'File Folder')
@@ -749,19 +750,26 @@ def UpdateFileDict(values, fileSets, colHeads):
     colExVals = {}
     headinc = 0
     headList = list(colHeads.keys())
+    #print(valKeys)#debug
     for key in setKeys:
         if key.startswith('Column '):
             if fileSets[key]['Column'] != '':
                 colExVals[key] = {'Type':fileSets[key]['Type'], 'Exists Definition':fileSets[key]['Exists Definition']}
             del fileSets[key]#so that autonumbering can be used--yes, it should have been a list of columns instead
     for key in valKeys:
+        #print(key, values[key])#debug
         if type(key) != type('abc'):#checks that the key is a string and skips if it isn't
             continue
         elif key.startswith('Column '):
             if key in values:
+                #print(key)#debug
                 for alpha, heading in colHeads.items():#converts headings back into alpha for use with main
+                    print(alpha, heading)#debug
                     if values[key] == heading:
                         values[key] = alpha
+                        #print(key, values[key])#debug
+                        #print('grabbed thing:', alpha, heading)#debug
+                        break
                 if values[key] == '':#cleans up values from returned extra columns
                     del values[key]
                     try: del values[(key + ' Type')]
@@ -824,7 +832,7 @@ def UpdateFileDict(values, fileSets, colHeads):
 
 #opens and controls either the File 1 Settings window or the File 2 Settings window
 def FileSettingsWindow(outputSets, file1Sets, file2Sets, windName, curdir, file1Resets, file2Resets): #(dict, dict, dict, str, str, dict, dict)
-    print(file1Sets)#debug
+    #print(file1Sets)#debug
     
     if windName.startswith('File 1'):
         fileSets = file1Sets
@@ -853,7 +861,7 @@ def FileSettingsWindow(outputSets, file1Sets, file2Sets, windName, curdir, file1
         if not i[0].startswith('Column '):
             continue
         else:
-            print(i)#debug
+            #print(i)#debug
             swLayout += [sg.Text(i[0] + ': '), sg.Combo(headList, default_value=fileCols[i[1]['Column']], size=(16,1), key=i[0], enable_events=True), sg.Text('Type: '), sg.Text(i[1]['Type'])],
             endColNum = int(i[0][7:]) + 1
     swLayout += [sg.Text('Column ' + str(endColNum) + ': '), sg.Combo(headList, size=(16,1), key='Column ' + str(endColNum), enable_events=True), sg.Text('Type: '), sg.Text('Data'),],
