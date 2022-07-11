@@ -1,0 +1,21 @@
+{% extends "inv_base.html" %}
+{% block content %}
+<html>
+    <body>
+    {% if current_user.is_authenticated %}
+        <div class="container">
+        <div class="row" style="font-size:150%">
+            You have finished your section. Take a break or use the button below to get a new assignment.
+        </div>
+
+        <div class="row" style="font-size:200%">
+            <form action="." method="POST" style="font-size:200%">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Confirm">
+            </form>
+        </div>
+    {% endif %}
+    </div><!-- /.container -->
+
+    </body>
+</html>
+{% endblock %}
