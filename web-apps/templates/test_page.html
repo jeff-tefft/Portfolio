@@ -1,0 +1,31 @@
+{% extends "inv_base.html" %}
+{% block content %}
+<html>
+    <body>
+    {% if current_user.is_authenticated %}
+        <div class="container">
+        <form action="." method='POST' >
+            <input name="sequence" type="text"><br>
+            <input type="checkbox" id= "count_nuc" name="check" value="check">
+            <label for="count_nuc">Count nucleotides</label>
+
+            <input type="checkbox" id= "gc_content" name="check" value="check">
+            <label for="gc_content">GC content</label><br>
+
+            <button type="submit" value="submit">Submit</button><br>
+
+            <input type="checkbox" id='XXX' name="check" value='check'> XXX<br/>
+            <input type="checkbox" id= "count_the" name="check" value="check">
+            <label for="count_the">count the</label><br>
+        </form>
+
+        <div class="row">
+            {{ message }}
+        </div>
+
+    {% endif %}
+    </div><!-- /.container -->
+
+    </body>
+</html>
+{% endblock %}
