@@ -1,0 +1,41 @@
+{% extends "inv_base.html" %}
+{% block content %}
+<html>
+    <body>
+    {% if current_user.is_authenticated %}
+        <div class="container">
+
+        <div class="row">
+            Enter the location name. This will create a new location if it is not present in the list below.
+        </div>
+        <div class="row" style="font-size:150%">
+            <form action="." method="POST">
+                Location: <input name="Location" value="" autofocus>
+                <input type="submit" name='submit_control' class="btn btn-success" value="Add Items to Location">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Delete Location">
+            </form>
+        </div>
+        <div class="row" style="font-size:200%"><b>
+            Locations
+        </b>
+        </div>
+        {% for id, location in locations %}
+            <div class="row" style="font-size:150%">
+                {{ id }} : {{ location }}
+            </div>
+        {% endfor %}
+
+
+        {{ message }}
+    {% endif %}
+
+    <div class="row" style="font-size:150%">
+        <form action="." method="POST">
+            <input type="submit" name='submit_control' class="btn btn-success" value="Back to Control Panel">
+        </form>
+    </div>
+    </div><!-- /.container -->
+
+    </body>
+</html>
+{% endblock %}
