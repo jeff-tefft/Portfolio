@@ -1,0 +1,41 @@
+{% extends "inv_base.html" %}
+{% block content %}
+<html>
+    <body>
+    {% if current_user.is_authenticated %}
+        <div class="container">
+
+        <div class="row" style="font-size:200%"><b>
+            Users
+        </b>
+        </div>
+        {% for user in users %}
+            <div class="row" style="font-size:150%">
+                {{ user }}
+            </div>
+        {% endfor %}
+        <div></div>
+        <div class="row" style="font-size:200%">
+            Change a user manually
+        </div>
+        <div class="row" style="font-size:150%">
+            <form action="." method="POST">
+                Username: <input name="Username" value="">
+                 Password: <input name="Password" value="">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Add User">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Delete User">
+            </form>
+        </div>
+        {{ message }}
+    {% endif %}
+    <div class="row" style="font-size:150%">
+        <form action="." method="POST">
+            <input type="submit" name='submit_control' class="btn btn-success" value="Back to Control Panel">
+        </form>
+    </div>
+
+    </div><!-- /.container -->
+
+    </body>
+</html>
+{% endblock %}
