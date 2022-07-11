@@ -1,0 +1,59 @@
+{% extends "inv_base.html" %}
+{% block content %}
+<html>
+    <body>
+    {% if current_user.is_authenticated %}
+        <div class="container">
+
+        <div class="row" style="font-size:200%"><b>
+            Items without Locations
+        </b>
+        </div>
+        {% for id, sku, location, description in no_loc_items %}
+            <div class="row" style="font-size:150%">
+                {{ id }} : {{ sku }} : {{ location }} : {{ description }}
+            </div>
+        {% endfor %}
+        <div class="row" style="font-size:200%">
+            Merge item SKUs
+        </div>
+        <div class="row" style="font-size:150%">
+            <form action="." method="POST">
+                Item ID 1: <input type="number" name="ID 1" value="">
+                 Item ID 2: <input type="number" name="ID 2" value="">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Merge">
+                 (Item 1 is kept)
+            </form>
+        </div>
+        <div>
+        </div>
+        <div class="row" style="font-size:150%">
+            <form action="." method="POST">
+                Search SKU: <input name="Search SKU" value="">
+                <input type="submit" name='submit_control' class="btn btn-success" value="Search">
+            </form>
+        </div>
+        <div class="row" style="font-size:200%"><b>
+            Searched Items
+        </b>
+        </div>
+        {% for id, sku, location, description in search_items %}
+            <div class="row" style="font-size:150%">
+                {{ id }} : {{ sku }} : {{ location }} : {{ description }}
+            </div>
+        {% endfor %}
+
+
+        {{ message }}
+    {% endif %}
+    <div class="row" style="font-size:150%">
+        <form action="." method="POST">
+            <input type="submit" name='submit_control' class="btn btn-success" value="Back to Control Panel">
+        </form>
+    </div>
+
+    </div><!-- /.container -->
+
+    </body>
+</html>
+{% endblock %}
